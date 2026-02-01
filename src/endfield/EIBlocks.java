@@ -91,7 +91,8 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
         conveyor = new ArmoredConveyor("conveyor") {
             {
                 itemCapacity = 1;
-                speed = 0.5f / 60;
+                speed = 0.07f;
+                displayedSpeed = 0.5f;
                 noSideBlend = true;
                 targetable = false;
                 requirements(Category.distribution, ItemStack.with());

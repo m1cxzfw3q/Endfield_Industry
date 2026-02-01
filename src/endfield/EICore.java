@@ -9,6 +9,6 @@ public class EICore extends Mod {
 
     @Override
     public void loadContent() {
-
+        EIBlocks.load();
     }
 }

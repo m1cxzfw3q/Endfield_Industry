@@ -2,6 +2,7 @@ package endfield;
 
 import arc.scene.ui.layout.Table;
 import mindustry.content.Fx;
+import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
@@ -64,6 +65,7 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
                 laserRange = 80;
                 autolink = false;
                 requirements(Category.power, ItemStack.with());
+                glowColor = Pal.powerLight;
             }
 
             @Override

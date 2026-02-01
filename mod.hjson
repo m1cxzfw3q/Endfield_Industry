@@ -1,20 +1,23 @@
 #the mod name as displayed in-game
-displayName: "Java Mod Template"
+displayName: "Endfield Industry"
 
 #the internal name of your mod
-name: "example-java-mod"
+name: "endfield-industry"
 
 #your name
 author: "You"
 
 #the fully qualified main class of the mod
-main: "example.ExampleJavaMod"
+main: "endfield.EICore"
 
 #the mod description as seen in the mod dialog
-description: "A Mindustry Java mod template."
+description: "
+⑦⑧⑦⑧⑦⑧⑦⑧⑦⑧⑦⑧
+神秘mod
+"
 
 #the mod version
-version: 1.0
+version: "0.1"
 
 #the minimum game build required to run this mod
 minGameVersion: 154

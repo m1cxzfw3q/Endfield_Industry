@@ -49,37 +49,37 @@ public class EIItems {
             hardness = 3;
         }};
 
-        sandLeaf = new Item("sand-leaf", Color.valueOf(""));
-        sandLeafSeeds = new Item("sand-leaf-seeds", Color.valueOf(""));
+        sandLeaf = new Item("sand-leaf", Color.valueOf("ffffff"));
+        sandLeafSeeds = new Item("sand-leaf-seeds", Color.valueOf("ffffff"));
 
-        ketoneShrub = new Item("ketone-shrub", Color.valueOf(""));
-        ketoneTreeSeeds = new Item("ketone-tree-seeds", Color.valueOf(""));
+        ketoneShrub = new Item("ketone-shrub", Color.valueOf("ffffff"));
+        ketoneTreeSeeds = new Item("ketone-tree-seeds", Color.valueOf("ffffff"));
 
-        carbonBlock = new Item("carbon-block", Color.valueOf("")) {{
+        carbonBlock = new Item("carbon-block", Color.valueOf("ffffff")) {{
             flammability = 1.3f;
             explosiveness = 0.4f;
         }};
 
-        crystalShell = new Item("crystal-shell", Color.valueOf(""));
-        amethystFiber = new Item("amethyst-fiber", Color.valueOf(""));
-        blueIronBlock = new Item("blue-iron-block", Color.valueOf(""));
+        crystalShell = new Item("crystal-shell", Color.valueOf("ffffff"));
+        amethystFiber = new Item("amethyst-fiber", Color.valueOf("ffffff"));
+        blueIronBlock = new Item("blue-iron-block", Color.valueOf("ffffff"));
 
-        stableCarbonBlock = new Item("stable-carbon-block", Color.valueOf("")) {{
+        stableCarbonBlock = new Item("stable-carbon-block", Color.valueOf("ffffff")) {{
             flammability = 1.5f;
         }};
 
-        denseCrystalline = new Item("dense-crystalline", Color.valueOf(""));
-        highCrystalFiber = new Item("high-crystal-fiber", Color.valueOf(""));
-        steelBlock = new Item("steel-block", Color.valueOf(""));
+        denseCrystalline = new Item("dense-crystalline", Color.valueOf("ffffff"));
+        highCrystalFiber = new Item("high-crystal-fiber", Color.valueOf("ffffff"));
+        steelBlock = new Item("steel-block", Color.valueOf("ffffff"));
 
-        carbonPowder = new Item("carbon-powder", Color.valueOf("")) {{
+        carbonPowder = new Item("carbon-powder", Color.valueOf("ffffff")) {{
             flammability = 0.65f;
         }};
 
-        amethystComponent = new Item("amethystComponent");
+        amethystComponent = new Item("amethystComponent", Color.valueOf("ffffff"));
 
-        low_capacityValleyBattery = new Item("low_capacityValleyBattery");
-        medium_capacityValleyBattery = new Item("medium_capacityValleyBattery");
-        high_capacityValleyBattery = new Item("high_capacityValleyBattery");
+        low_capacityValleyBattery = new Item("low_capacityValleyBattery", Color.valueOf("ffffff"));
+        medium_capacityValleyBattery = new Item("medium_capacityValleyBattery", Color.valueOf("ffffff"));
+        high_capacityValleyBattery = new Item("high_capacityValleyBattery", Color.valueOf("ffffff"));
     }
 }

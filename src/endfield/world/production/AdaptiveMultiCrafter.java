@@ -4,11 +4,20 @@ import arc.struct.Seq;
 import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.meta.Stat;
 
 public class AdaptiveMultiCrafter extends GenericCrafter {
     public Seq<Recipe> recipes = new Seq<>();
     public AdaptiveMultiCrafter(String name) {
         super(name);
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+        stats.remove(Stat.productionTime);
+        stats.remove(Stat.output);
+        stats.remove(Stat.input);
     }
 
     public class AdaptiveMultiCrafterBuild extends GenericCrafterBuild {

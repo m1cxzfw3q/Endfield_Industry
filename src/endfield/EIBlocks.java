@@ -1,76 +1,36 @@
 package endfield;
 
-import arc.scene.ui.layout.Table;
-import arc.util.io.Reads;
-import mindustry.ctype.UnlockableContent;
+import arc.Core;
+import endfield.special.EIConveyorBlock;
+import endfield.special.ProtocolCoreBlock;
+import endfield.special.ProtocolStorageBoxBlock;
 import mindustry.gen.Building;
-import mindustry.gen.Teamc;
+import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
-import mindustry.world.Edges;
-import mindustry.world.Tile;
-import mindustry.world.blocks.distribution.ArmoredConveyor;
+import mindustry.world.blocks.power.ConsumeGenerator;
 import mindustry.world.blocks.power.LongPowerNode;
-import mindustry.world.blocks.storage.CoreBlock;
-import mindustry.world.blocks.storage.StorageBlock;
-import mindustry.world.meta.BuildVisibility;
+import mindustry.world.consumers.ConsumeItemList;
+import mindustry.world.meta.Stat;
 
-import static mindustry.Vars.content;
+import static mindustry.Vars.world;
 
 public class EIBlocks {//武陵的内容我想等武陵更完再更
     public static Block
     protocolCore, //协议核心
     protocolStorageBox, //协议储存箱
     repeater, //中继器
-    conveyor //传送带
+    conveyor, //传送带
+    thermalEnergyPool //热能池
+
     ;
 
     public static void load() {
-        protocolCore = new CoreBlock("protocol-core") {
-            {
-                size = 9;
-                itemCapacity = 8000;
-                requirements(Category.effect, BuildVisibility.hidden, ItemStack.with());
-                consumePowerBuffered(10000);
-                outputsPower = true;
-            }
-            @Override
-            protected void initBuilding() {
-                buildType = ProtocolCoreBuild::create;
-            }
-            class ProtocolCoreBuild extends CoreBuild {
-                @Override
-                public float getPowerProduction(){
-                    return enabled ? 200f / 60 : 0;
-                }
-            }
-        };
-
-        protocolStorageBox = new StorageBlock("protocol-storage-box") {
-            {
-                size = 3;
-                itemCapacity = 300;
-                coreMerge = false;
-
-                config(Boolean.class, (StorageBuild building, Boolean b) -> {
-
-                });
-                requirements(Category.effect, ItemStack.with());
-            }
-            @Override
-            protected void initBuilding() {
-                buildType = ProtocolStorageBoxBuild::create;
-            }
-            class ProtocolStorageBoxBuild extends StorageBuild {
-                @Override
-                public void buildConfiguration(Table table) {
-                    super.buildConfiguration(table);
-                }
-            }
-        };
+        protocolCore = new ProtocolCoreBlock("protocol-core");
+        protocolStorageBox = new ProtocolStorageBoxBlock("protocol-storage-box");
 
         repeater = new LongPowerNode("repeater") {
             {
@@ -78,130 +38,76 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
                 maxNodes = 1000;
                 laserRange = 80;
                 autolink = false;
-                requirements(Category.power, ItemStack.with());
-                glowColor = Pal.powerLight;
+                requirements(Category.power, ItemStack.with(EIItems.crystalShell, 20));
+                glowColor = laserColor2 = Pal.powerLight;
+                laser = Core.atlas.find("power-beam");
+                laserEnd = Core.atlas.find("power-beam-end");
             }
             @Override
             public void setBars() {
                 super.setBars();
                 removeBar("connections");
             }
+
+            @Override
+            public void setStats() {
+                super.setStats();
+                stats.remove(Stat.powerConnections);
+            }
+
+            @Override
+            public void drawLaser(float x1, float y1, float x2, float y2, int size1, int size2) {
+                Drawf.laser(laser, laserEnd, x1, y1, x2, y2, laserScale);
+            }
         };
 
-        conveyor = new ArmoredConveyor("conveyor") {
-            {
-                itemCapacity = 1;
-                speed = 0.07f;
-                displayedSpeed = 0.5f;
-                noSideBlend = true;
-                targetable = false;
-                requirements(Category.distribution, ItemStack.with());
-            }
-            @Override
-            protected void initBuilding() {
-                buildType = EIConveyorBuild::create;
-            }
-            class EIConveyorBuild extends ArmoredConveyorBuild {
-                public final int capacityX = 1;
-                {
-                    ids = new Item[capacityX];
-                    xs = new float[capacityX];
-                    ys = new float[capacityX];
-                }
+        conveyor = new EIConveyorBlock("conveyor");
 
+        thermalEnergyPool = new ConsumeGenerator("thermal-energy-pool") {{
+            size = 2;
+            itemDuration = 10 * 60;
+            itemDurationMultipliers.put(EIItems.low_capacityValleyBattery, 4);
+            itemDurationMultipliers.put(EIItems.medium_capacityValleyBattery, 4);
+            itemDurationMultipliers.put(EIItems.high_capacityValleyBattery, 4);
+            powerProduction = 50f / 60;
+
+            consume(new ConsumeItemList(){{
+                setMultipliers(
+                        EIItems.sourceOre, 1,
+                        EIItems.low_capacityValleyBattery, 220f / 50,
+                        EIItems.medium_capacityValleyBattery, 420f / 50,
+                        EIItems.high_capacityValleyBattery, 1100f / 50
+                        //,EIItems.low_capacityWulingBattery, 1600f / 50
+                );
+            }});
+
+            itemCapacity = 50;
+            buildType = ThermalEnergyPoolBuild::create;
+            requirements(Category.power, ItemStack.with(EIItems.crystalShell, 10, EIItems.amethystComponent, 10));
+        }
+            public class ThermalEnergyPoolBuild extends ConsumeGeneratorBuild {//写世处写的   能跑就行
                 @Override
-                public void handleStack(Item item, int amount, Teamc source){
-                    amount = Math.min(amount, capacityX - len);
-
-                    for(int i = amount - 1; i >= 0; i--){
-                        add(0);
-                        xs[0] = 0;
-                        ys[0] = i * 0.4f;
-                        ids[0] = item;
-                        items.add(item, 1);
-                    }
-
-                    noSleep();
-                }
-
-                @Override
-                public boolean acceptItem(Building source, Item item){
-                    if(len >= capacityX) return false;
-                    Tile facing = Edges.getFacingEdge(source.tile, tile);
-                    if(facing == null) return false;
-                    int direction = Math.abs(facing.relativeTo(tile.x, tile.y) - rotation);
-                    return (((direction == 0) && minitem >= 0.4f) || ((direction % 2 == 1) && minitem > 0.7f)) && !(source.block.rotate && next == source);
-                }
-
-                @Override
-                public void handleItem(Building source, Item item){
-                    if(len >= capacityX) return;
-
-                    int r = rotation;
-                    Tile facing = Edges.getFacingEdge(source.tile, tile);
-                    int ang = ((facing.relativeTo(tile.x, tile.y) - r));
-                    float x = (ang == -1 || ang == 3) ? 1 : (ang == 1 || ang == -3) ? -1 : 0;
-
-                    noSleep();
-                    items.add(item, 1);
-
-                    if(Math.abs(facing.relativeTo(tile.x, tile.y) - r) == 0){ //idx = 0
-                        add(0);
-                        xs[0] = x;
-                        ys[0] = 0;
-                        ids[0] = item;
-                    }else{ //idx = mid
-                        add(mid);
-                        xs[mid] = x;
-                        ys[mid] = 0.5f;
-                        ids[mid] = item;
-                    }
-                }
-
-                @Override
-                public void read(Reads read, byte revision){
-                    super.read(read, revision);
-                    int amount = read.i();
-                    len = Math.min(amount, capacityX);
-
-                    for(int i = 0; i < amount; i++){
-                        short id;
-                        float x, y;
-
-                        if(revision == 0){
-                            int val = read.i();
-                            id = (short)(((byte)(val >> 24)) & 0xff);
-                            x = (float)((byte)(val >> 16)) / 127f;
-                            y = ((float)((byte)(val >> 8)) + 128f) / 255f;
-                        }else{
-                            id = read.s();
-                            x = (float)read.b() / 127f;
-                            y = ((float)read.b() + 128f) / 255f;
+                public boolean acceptItem(Building source, Item item) {
+                    Building b1 = null, b2 = null;
+                    switch (rotation) {
+                        case 0 -> {
+                            b1 = world.tile((int) x / 8 + 2 , (int) y / 8).build;
+                            b2 = world.tile((int) x / 8 + 2 , (int) y / 8 + 1).build;
                         }
-
-                        if(i < capacityX){
-                            ids[i] = content.item(id);
-                            xs[i] = x;
-                            ys[i] = y;
+                        case 1 -> {
+                            b1 = world.tile((int) x / 8 , (int) y / 8 + 2).build;
+                            b2 = world.tile((int) x / 8 + 1 , (int) y / 8 + 2).build;
+                        }
+                        case 2 -> {
+                            b1 = world.tile((int) x / 8 - 1 , (int) y / 8).build;
+                            b2 = world.tile((int) x / 8 - 1 , (int) y / 8 + 1).build;
+                        }
+                        case 3 -> {
+                            b1 = world.tile((int) x / 8 , (int) y / 8 - 1).build;
+                            b2 = world.tile((int) x / 8 + 1 , (int) y / 8 - 1).build;
                         }
                     }
-
-                    //this updates some state
-                    updateTile();
-                }
-
-                @Override
-                public void setProp(UnlockableContent content, double value){
-                    if(content instanceof Item item && items != null){
-                        int amount = Math.min((int)value, capacityX);
-                        if(items.get(item) != amount){
-                            if(items.get(item) < amount){
-                                handleStack(item, amount - items.get(item), null);
-                            }else if(amount >= 0){
-                                removeStack(item, items.get(item) - amount);
-                            }
-                        }
-                    }else super.setProp(content, value);
+                    return super.acceptItem(source, item) && (b1 == source || b2 == source);
                 }
             }
         };

@@ -1,8 +1,85 @@
 package endfield;
 
-public class EIItems {//武陵的内容我想等武陵更完再更
+import arc.graphics.Color;
+import mindustry.type.Item;
+
+public class EIItems {
+    public static Item
+    /* 矿物 */
+    sourceOre, amethystOre, vivianite,
+    //源矿 紫晶矿 蓝铁矿
+
+    /* 植物和对应的种子  仅保留工业需要的植物 */
+    sandLeaf, sandLeafSeeds,  ketoneShrub, ketoneTreeSeeds,
+    //砂叶 砂叶种子 酮化灌木 酮化树种
+
+    /* 工业产物(四号谷地) */
+    carbonBlock, crystalShell, amethystFiber, blueIronBlock, stableCarbonBlock, denseCrystalline,
+    //碳块 晶体外壳 紫晶纤维 蓝铁块 稳定碳块 密制晶体
+
+    highCrystalFiber, steelBlock, carbonPowder, sourceOrePowder, crystalShellPowder, amethystPowder, blueIronPowder, sandLeafPowder,
+    //高晶纤维 钢块 碳粉末 源石粉末 晶体外壳粉末 紫晶粉末 蓝铁粉末 砂叶粉末
+
+    ketonicShrubPowder, denseCarbonPowder, denseOriginiumPowder, denseCrystalPowder, highCrystalPowder, denseBlueIronPowder, purpleCrystalVial,
+    //酮化灌木粉末 致密碳粉末 致密源石粉末 致密晶体粉末 高晶粉末 致密蓝铁粉末 紫晶质瓶
+
+    blueIronBottle, highCrystalBottle, steelBottle, amethystComponent, ironComponent, highCrystalComponent, steelComponent, amethystEquipmentPart,
+    blueIronEquipmentPart,
+    //蓝铁瓶 高晶质瓶 钢质瓶 紫晶零件 铁质零件 高晶零件 钢制零件 紫晶装备原件 蓝铁装备元件
+
+    highCrystalEquipmentComponents, low_capacityValleyBattery, medium_capacityValleyBattery, high_capacityValleyBattery
+    //高晶装备原件 低容谷地电池 中容谷地电池 高容谷地电池
+
+    /* 工业产物(武陵) */
+    //TODO 武陵的内容我想等武陵更完再更
+
+    // ,Xirang, XirangEquipmentComponents, low_capacityWulingBattery //息壤 息壤装备原件 低容武陵电池
+    ;
 
     public static void load() {
+        sourceOre = new Item("source-ore", Color.valueOf("D06C16")) {{
+            hardness = 1;
+        }};
 
+        amethystOre = new Item("amethyst-ore", Color.valueOf("745991")) {{
+            hardness = 2;
+        }};
+
+        vivianite = new Item("vivianite", Color.valueOf("5276AA")) {{
+            hardness = 3;
+        }};
+
+        sandLeaf = new Item("sand-leaf", Color.valueOf(""));
+        sandLeafSeeds = new Item("sand-leaf-seeds", Color.valueOf(""));
+
+        ketoneShrub = new Item("ketone-shrub", Color.valueOf(""));
+        ketoneTreeSeeds = new Item("ketone-tree-seeds", Color.valueOf(""));
+
+        carbonBlock = new Item("carbon-block", Color.valueOf("")) {{
+            flammability = 1.3f;
+            explosiveness = 0.4f;
+        }};
+
+        crystalShell = new Item("crystal-shell", Color.valueOf(""));
+        amethystFiber = new Item("amethyst-fiber", Color.valueOf(""));
+        blueIronBlock = new Item("blue-iron-block", Color.valueOf(""));
+
+        stableCarbonBlock = new Item("stable-carbon-block", Color.valueOf("")) {{
+            flammability = 1.5f;
+        }};
+
+        denseCrystalline = new Item("dense-crystalline", Color.valueOf(""));
+        highCrystalFiber = new Item("high-crystal-fiber", Color.valueOf(""));
+        steelBlock = new Item("steel-block", Color.valueOf(""));
+
+        carbonPowder = new Item("carbon-powder", Color.valueOf("")) {{
+            flammability = 0.65f;
+        }};
+
+        amethystComponent = new Item("amethystComponent");
+
+        low_capacityValleyBattery = new Item("low_capacityValleyBattery");
+        medium_capacityValleyBattery = new Item("medium_capacityValleyBattery");
+        high_capacityValleyBattery = new Item("high_capacityValleyBattery");
     }
 }

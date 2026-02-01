@@ -11,13 +11,13 @@ repositories{
 }
 
 java{
-    targetCompatibility = 8
+    targetCompatibility = 17
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
 ext{
     //the build number that this mod is made for
-    mindustryVersion = 'v154.2'
+    mindustryVersion = 'v154.3'
     jabelVersion = "93fde537c7"
     //windows sucks
     isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
@@ -28,7 +28,7 @@ ext{
 allprojects{
     tasks.withType(JavaCompile).tap{
         configureEach{
-            options.compilerArgs.addAll(['--release', '8'])
+            options.compilerArgs.addAll(['--release', '17'])
         }
     }
 }

@@ -37,13 +37,11 @@ public class ProtocolCoreBlock extends CoreBlock {
     public void setBars(){
         super.setBars();
 
-        if(hasPower && outputsPower){
-            addBar("power", (ProtocolCoreBlock.ProtocolCoreBuild entity) -> new Bar(() ->
-                    Core.bundle.format("bar.poweroutput",
-                            Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)),
-                    () -> Pal.powerBar,
-                    () -> entity.productionEfficiency));
-        }
+        addBar("power", (ProtocolCoreBlock.ProtocolCoreBuild entity) -> new Bar(() ->
+                Core.bundle.format("bar.poweroutput",
+                        Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)),
+                () -> Pal.powerBar,
+                () -> entity.productionEfficiency));
     }
 
     public class ProtocolCoreBuild extends CoreBuild {

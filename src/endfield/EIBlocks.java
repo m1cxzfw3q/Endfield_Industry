@@ -4,12 +4,14 @@ import endfield.special.EIConveyorBlock;
 import endfield.special.ProtocolCoreBlock;
 import endfield.special.ProtocolStorageBoxBlock;
 import endfield.special.ThermalEnergyPoolBlock;
+import endfield.world.consume.EIConsumeItemEfficiency;
 import mindustry.graphics.Drawf;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
+import mindustry.world.Tile;
+import mindustry.world.blocks.distribution.Duct;
 import mindustry.world.blocks.power.PowerNode;
-import mindustry.world.consumers.ConsumeItemList;
 import mindustry.world.meta.Stat;
 
 public class EIBlocks {//武陵的内容我想等武陵更完再更
@@ -62,6 +64,11 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
             public void drawLaser(float x1, float y1, float x2, float y2, int size1, int size2) {
                 Drawf.laser(laser, laserEnd, x1, y1, x2, y2, laserScale);
             }
+
+            @Override
+            public void drawShadow(Tile tile) {
+                super.drawShadow(tile);
+            }
         };
 
         conveyor = new EIConveyorBlock("conveyor");
@@ -69,20 +76,17 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
         thermalEnergyPool = new ThermalEnergyPoolBlock("thermal-energy-pool") {{
             size = 2;
             itemDuration = 10f * 60;
-            itemDurationMultipliers.put(EIItems.low_capacityValleyBattery, 4);
-            itemDurationMultipliers.put(EIItems.medium_capacityValleyBattery, 4);
-            itemDurationMultipliers.put(EIItems.high_capacityValleyBattery, 4);
+            itemDurationMultipliers.put(EIItems.low_capacityValleyBattery, 4f);
+            itemDurationMultipliers.put(EIItems.medium_capacityValleyBattery, 4f);
+            itemDurationMultipliers.put(EIItems.high_capacityValleyBattery, 4f);
             powerProduction = 50f / 60;
 
-            consume(new ConsumeItemList(){{
-                setMultipliers(
-                        EIItems.sourceOre, 1f,
-                        EIItems.low_capacityValleyBattery, 220f / 50,
-                        EIItems.medium_capacityValleyBattery, 420f / 50,
-                        EIItems.high_capacityValleyBattery, 1100f / 50
-                        //,EIItems.low_capacityWulingBattery, 1600f / 50
-                );
-            }});
+            consume(new EIConsumeItemEfficiency(
+                    EIItems.sourceOre, 1f, 1f,
+                    EIItems.low_capacityValleyBattery, 4f, 220f/50f,
+                    EIItems.medium_capacityValleyBattery, 4f, 420f/50f,
+                    EIItems.high_capacityValleyBattery, 4f, 1100f/50f
+            ));
 
             itemCapacity = 50;
             requirements(Category.power, ItemStack.with(EIItems.crystalShell, 10, EIItems.amethystComponent, 10));

@@ -1,4 +1,4 @@
-package endfield.world.production;
+package endfield.world.blocks.production;
 
 import arc.struct.Seq;
 import mindustry.type.ItemStack;
@@ -43,10 +43,10 @@ public class AdaptiveMultiCrafter extends GenericCrafter {
         }
     }
 
-    public class Recipe {
+    public static class Recipe {
         public ItemStack[] inputItems, outputItems;
         public LiquidStack inputLiquid, outputLiquid;
-        public int craftTime = 120;
+        public float craftTime = 120f;
 
         public Recipe(int time) {
             craftTime = time;

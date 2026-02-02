@@ -27,6 +27,10 @@ public class EIConsumeItemEfficiency extends ConsumeItemEfficiency {
     @Override
     public float efficiencyMultiplier(Building build){
         var item = getConsumed(build);
+        return item == null ? 0f : itemEfficiencyMultiplier(item);
+    }
+
+    public float itemEfficiencyMultiplier(Item item){
         return itemMultipliers.get(item, 1f);
     }
 }

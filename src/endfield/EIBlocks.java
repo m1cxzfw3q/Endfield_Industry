@@ -10,7 +10,6 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.Tile;
-import mindustry.world.blocks.distribution.Duct;
 import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.meta.Stat;
 

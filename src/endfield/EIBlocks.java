@@ -65,7 +65,7 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
 
         thermalEnergyPool = new ConsumeGenerator("thermal-energy-pool") {{
             size = 2;
-            itemDuration = 10 * 60;
+            itemDuration = 10f * 60;
             itemDurationMultipliers.put(EIItems.low_capacityValleyBattery, 4);
             itemDurationMultipliers.put(EIItems.medium_capacityValleyBattery, 4);
             itemDurationMultipliers.put(EIItems.high_capacityValleyBattery, 4);
@@ -73,7 +73,7 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
 
             consume(new ConsumeItemList(){{
                 setMultipliers(
-                        EIItems.sourceOre, 1,
+                        EIItems.sourceOre, 1f,
                         EIItems.low_capacityValleyBattery, 220f / 50,
                         EIItems.medium_capacityValleyBattery, 420f / 50,
                         EIItems.high_capacityValleyBattery, 1100f / 50

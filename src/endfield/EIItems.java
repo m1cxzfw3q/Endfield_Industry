@@ -49,26 +49,26 @@ public class EIItems {
             hardness = 3;
         }};
 
-        sandLeaf = new Item("sand-leaf", Color.valueOf("ffffff"));
-        sandLeafSeeds = new Item("sand-leaf-seeds", Color.valueOf("ffffff"));
+        sandLeaf = new Item("sand-leaf", Color.valueOf("F0BD2F"));
+        sandLeafSeeds = new Item("sand-leaf-seeds", Color.valueOf("F5E300"));
 
-        ketoneShrub = new Item("ketone-shrub", Color.valueOf("ffffff"));
-        ketoneTreeSeeds = new Item("ketone-tree-seeds", Color.valueOf("ffffff"));
+        ketoneShrub = new Item("ketone-shrub", Color.valueOf("757552"));
+        ketoneTreeSeeds = new Item("ketone-tree-seeds", Color.valueOf("DEDC81"));
 
-        carbonBlock = new Item("carbon-block", Color.valueOf("ffffff")) {{
+        carbonBlock = new Item("carbon-block", Color.valueOf("2F332F")) {{
             flammability = 1.3f;
             explosiveness = 0.4f;
         }};
 
-        crystalShell = new Item("crystal-shell", Color.valueOf("ffffff"));
-        amethystFiber = new Item("amethyst-fiber", Color.valueOf("ffffff"));
-        blueIronBlock = new Item("blue-iron-block", Color.valueOf("ffffff"));
+        crystalShell = new Item("crystal-shell", Color.valueOf("EEC96D"));
+        amethystFiber = new Item("amethyst-fiber", Color.valueOf("9372B8"));
+        blueIronBlock = new Item("blue-iron-block", Color.valueOf("539FBB"));
 
-        stableCarbonBlock = new Item("stable-carbon-block", Color.valueOf("ffffff")) {{
+        stableCarbonBlock = new Item("stable-carbon-block", Color.valueOf("62656F")) {{
             flammability = 1.5f;
         }};
 
-        denseCrystalline = new Item("dense-crystalline", Color.valueOf("ffffff"));
+        denseCrystalline = new Item("dense-crystalline", Color.valueOf("CF9B66"));
         highCrystalFiber = new Item("high-crystal-fiber", Color.valueOf("ffffff"));
         steelBlock = new Item("steel-block", Color.valueOf("ffffff"));
 

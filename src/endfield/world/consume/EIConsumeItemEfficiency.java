@@ -11,6 +11,7 @@ public class EIConsumeItemEfficiency extends ConsumeItemEfficiency {
     public EIConsumeItemEfficiency(Object... obj){
         super();
         for (int i = 0; i < obj.length; i+=3) {
+            itemDurationMultipliers = new ObjectFloatMap<>();
             itemDurationMultipliers.put((Item)obj[i], (float)obj[i+1]);
             itemMultipliers.put((Item)obj[i], (float)obj[i+2]);
         }

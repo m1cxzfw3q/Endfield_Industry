@@ -17,6 +17,7 @@ public class ProtocolStorageBoxBlock extends StorageBlock {
 
         });
         requirements(Category.effect, ItemStack.with(EIItems.crystalShell, 20));
+        consumePower(5 / 60f);
     }
 
     public class ProtocolStorageBoxBuild extends StorageBuild {

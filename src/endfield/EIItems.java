@@ -20,20 +20,20 @@ public class EIItems {
     highCrystalFiber, steelBlock, carbonPowder, sourceOrePowder, crystalShellPowder, amethystPowder, blueIronPowder, sandLeafPowder,
     //高晶纤维 钢块 碳粉末 源石粉末 晶体外壳粉末 紫晶粉末 蓝铁粉末 砂叶粉末
 
-    ketonicShrubPowder, denseCarbonPowder, denseOriginiumPowder, denseCrystalPowder, highCrystalPowder, denseBlueIronPowder, purpleCrystalVial,
+    ketonicShrubPowder, denseCarbonPowder, denseOriginiumPowder, denseCrystalPowder, highCrystalPowder, denseBlueIronPowder, purpleCrystalBottle,
     //酮化灌木粉末 致密碳粉末 致密源石粉末 致密晶体粉末 高晶粉末 致密蓝铁粉末 紫晶质瓶
 
     blueIronBottle, highCrystalBottle, steelBottle, amethystComponent, ironComponent, highCrystalComponent, steelComponent, amethystEquipmentPart,
     blueIronEquipmentPart,
     //蓝铁瓶 高晶质瓶 钢质瓶 紫晶零件 铁质零件 高晶零件 钢制零件 紫晶装备原件 蓝铁装备元件
 
-    highCrystalEquipmentComponents, low_capacityValleyBattery, medium_capacityValleyBattery, high_capacityValleyBattery
+    highCrystalEquipmentPart, low_capacityValleyBattery, medium_capacityValleyBattery, high_capacityValleyBattery
     //高晶装备原件 低容谷地电池 中容谷地电池 高容谷地电池
 
     /* 工业产物(武陵) */
     //TODO 武陵的内容我想等武陵更完再更
 
-    // ,Xirang, XirangEquipmentComponents, low_capacityWulingBattery //息壤 息壤装备原件 低容武陵电池
+    // ,Xirang, XirangEquipmentPart, low_capacityWulingBattery //息壤 息壤装备原件 低容武陵电池
     ;
 
     public static void load() {
@@ -75,11 +75,43 @@ public class EIItems {
         carbonPowder = new Item("carbon-powder", Color.valueOf("ffffff")) {{
             flammability = 0.65f;
         }};
+        sourceOrePowder = new Item("source-ore-powder", Color.valueOf("ffffff"));
+        crystalShellPowder = new Item("crystal-shell-powder", Color.valueOf("ffffff"));
+        amethystPowder = new Item("amethyst-powder", Color.valueOf("ffffff"));
+        blueIronPowder = new Item("blue-iron-powder", Color.valueOf("ffffff"));
+        sandLeafPowder = new Item("sand-leaf-powder", Color.valueOf("ffffff"));
+        ketonicShrubPowder = new Item("ketone-shrub-powder", Color.valueOf("ffffff"));
 
-        amethystComponent = new Item("amethystComponent", Color.valueOf("ffffff"));
+        denseCarbonPowder = new Item("dense-carbon-powder", Color.valueOf("ffffff"));
+        denseOriginiumPowder = new Item("dense-originium-powder", Color.valueOf("ffffff"));
+        denseCrystalPowder = new Item("dense-crystal-powder", Color.valueOf("ffffff"));
+        highCrystalPowder = new Item("high-crystal-powder", Color.valueOf("ffffff"));
+        denseBlueIronPowder = new Item("dense-blue-iron-powder", Color.valueOf("ffffff"));
 
-        low_capacityValleyBattery = new Item("low_capacityValleyBattery", Color.valueOf("ffffff"));
-        medium_capacityValleyBattery = new Item("medium_capacityValleyBattery", Color.valueOf("ffffff"));
-        high_capacityValleyBattery = new Item("high_capacityValleyBattery", Color.valueOf("ffffff"));
+        purpleCrystalBottle = new Item("purple-crystal-bottle", Color.valueOf("ffffff"));
+        blueIronBottle = new Item("blue-iron-bottle", Color.valueOf("ffffff"));
+        highCrystalBottle = new Item("high-crystal-bottle", Color.valueOf("ffffff"));
+        steelBottle = new Item("steel-bottle", Color.valueOf("ffffff"));
+
+        amethystComponent = new Item("amethyst-component", Color.valueOf("ffffff"));
+        ironComponent = new Item("iron-component", Color.valueOf("ffffff"));
+        highCrystalComponent = new Item("high-crystal-component", Color.valueOf("ffffff"));
+        steelComponent = new Item("steel-component", Color.valueOf("ffffff"));
+
+        amethystEquipmentPart = new Item("amethyst-equipment-part", Color.valueOf("ffffff"));
+        blueIronEquipmentPart = new Item("blue-iron-equipment-part", Color.valueOf("ffffff"));
+        highCrystalEquipmentPart = new Item("high-crystal-equipment-part", Color.valueOf("ffffff"));
+
+        low_capacityValleyBattery = new Item("low-capacity-valley-battery", Color.valueOf("ffffff"));
+        medium_capacityValleyBattery = new Item("medium-capacity-valley-battery", Color.valueOf("ffffff"));
+        high_capacityValleyBattery = new Item("high-capacity-valley-battery", Color.valueOf("ffffff"));
+
+
+        /*
+        Xirang = new Item("Xirang", Color.valueOf("ffffff"));
+        XirangEquipmentPart = new Item("Xirang-equipment-part", Color.valueOf("ffffff"));
+
+        low_capacityWulingBattery = new Item("low-capacity-wuling-battery", Color.valueOf("ffffff"));
+         */
     }
 }

@@ -14,18 +14,25 @@ import mindustry.world.meta.Stat;
 
 public class EIBlocks {//武陵的内容我想等武陵更完再更
     public static Block
+    /* 基础(没管道) */
     protocolCore, //协议核心
+    subCore, //次级核心
     conveyor, //传送带
-
+    /* 仓储(四号谷地) */
     protocolStorageBox, //协议储存箱
-
+    /* 生产(四号谷地) */
+    /* 制造(四号谷地) */
+    /* 电力(四号谷地) */
     repeater, //中继器
     thermalEnergyPool //热能池
+    /* 功能 */
+    /* 战斗 */
 
     ;
 
     public static void load() {
         protocolCore = new ProtocolCoreBlock("protocol-core");
+        subCore = new ProtocolCoreBlock("sub-core");
         protocolStorageBox = new ProtocolStorageBoxBlock("protocol-storage-box");
 
         repeater = new PowerNode("repeater") {

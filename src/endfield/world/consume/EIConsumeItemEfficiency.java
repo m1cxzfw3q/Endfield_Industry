@@ -17,13 +17,6 @@ public class EIConsumeItemEfficiency extends ConsumeItemEfficiency {
         }
     }
 
-    /** Initializes item efficiency multiplier map. Format: [item1, mult1, item2, mult2...] */
-    public void setMultipliers(Object... objects){
-        for(int i = 0; i < objects.length; i += 2){
-            itemMultipliers.put((Item)objects[i], (Float)objects[i + 1]);
-        }
-    }
-
     @Override
     public float efficiencyMultiplier(Building build){
         var item = getConsumed(build);

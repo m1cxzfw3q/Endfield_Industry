@@ -54,7 +54,7 @@ public class EIConveyorBlock extends ArmoredConveyor {
             if(facing == null) return false;
             int direction = Math.abs(facing.relativeTo(tile.x, tile.y) - rotation);
             return (((direction == 0) && minitem >= 0.4f) || ((direction % 2 == 1) && minitem > 0.7f)) && !(source.block.rotate && next == source)
-                    && (source.block instanceof EIConveyorBlock || Edges.getFacingEdge(source.tile, tile).relativeTo(tile) == rotation);
+                    && (Edges.getFacingEdge(source.tile, tile).relativeTo(tile) == rotation);
         }
 
         @Override

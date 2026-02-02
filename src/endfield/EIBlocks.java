@@ -32,7 +32,9 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
 
     public static void load() {
         protocolCore = new ProtocolCoreBlock("protocol-core");
-        subCore = new ProtocolCoreBlock("sub-core");
+        subCore = new ProtocolCoreBlock("sub-core") {{
+            isSub = true;
+        }};
         protocolStorageBox = new ProtocolStorageBoxBlock("protocol-storage-box");
 
         repeater = new PowerNode("repeater") {

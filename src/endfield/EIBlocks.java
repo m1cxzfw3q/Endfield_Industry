@@ -15,9 +15,11 @@ import mindustry.world.meta.Stat;
 public class EIBlocks {//武陵的内容我想等武陵更完再更
     public static Block
     protocolCore, //协议核心
-    protocolStorageBox, //协议储存箱
-    repeater, //中继器
     conveyor, //传送带
+
+    protocolStorageBox, //协议储存箱
+
+    repeater, //中继器
     thermalEnergyPool //热能池
 
     ;
@@ -75,6 +77,8 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
 
             itemCapacity = 50;
             requirements(Category.power, ItemStack.with(EIItems.crystalShell, 10, EIItems.amethystComponent, 10));
+            consumePower(0f); //接入电网才能运作
+            consumesPower = true;
         }};
     }
 }

@@ -20,6 +20,8 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
     protocolCore, //协议核心
     subCore, //次级核心
     conveyor, //传送带
+    /* 采集(四号谷地) */
+    /* 物流(四号谷地) */
     /* 仓储(四号谷地) */
     protocolStorageBox, //协议储存箱
     /* 生产(四号谷地) */
@@ -27,8 +29,7 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
     /* 电力(四号谷地) */
     repeater, //中继器
     thermalEnergyPool //热能池
-    /* 功能 */
-    /* 战斗 */
+    /* 战斗辅助 */
 
     ;
 

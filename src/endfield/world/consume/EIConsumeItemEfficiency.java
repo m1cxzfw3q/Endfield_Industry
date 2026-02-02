@@ -1,9 +1,20 @@
 package endfield.world.consume;
 
+import arc.Core;
+import arc.func.Boolf;
+import arc.func.Floatf;
 import arc.struct.ObjectFloatMap;
+import arc.util.Nullable;
+import arc.util.Scaling;
+import arc.util.Strings;
 import mindustry.gen.Building;
 import mindustry.type.Item;
+import mindustry.ui.Styles;
 import mindustry.world.consumers.ConsumeItemEfficiency;
+import mindustry.world.meta.*;
+
+import static mindustry.Vars.content;
+import static mindustry.world.meta.StatValues.fixValue;
 
 public class EIConsumeItemEfficiency extends ConsumeItemEfficiency {
     public ObjectFloatMap<Item> itemMultipliers = new ObjectFloatMap<>();
@@ -15,6 +26,8 @@ public class EIConsumeItemEfficiency extends ConsumeItemEfficiency {
             itemDurationMultipliers.put((Item)obj[i], (float)obj[i+1]);
             itemMultipliers.put((Item)obj[i], (float)obj[i+2]);
         }
+        filter = item -> itemMultipliers.containsKey(item);
+        booster = true;
     }
 
     @Override

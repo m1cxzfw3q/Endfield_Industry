@@ -9,6 +9,7 @@ import static mindustry.Vars.world;
 public class ThermalEnergyPoolBlock extends ConsumeGenerator {
     public ThermalEnergyPoolBlock(String name) {
         super(name);
+        rotate = true;
     }
     public class ThermalEnergyPoolBuild extends ConsumeGeneratorBuild {//写世处写的   能跑就行
         @Override

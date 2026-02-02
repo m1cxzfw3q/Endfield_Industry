@@ -37,7 +37,7 @@ public class EIConveyorBlock extends ArmoredConveyor {
             amount = Math.min(amount, capacityX - len);
 
             for(int i = amount - 1; i >= 0; i--){
-                add(0);
+                addX(0);
                 xs[0] = 0;
                 ys[0] = i * 0.4f;
                 ids[0] = item;
@@ -70,12 +70,12 @@ public class EIConveyorBlock extends ArmoredConveyor {
             items.add(item, 1);
 
             if(Math.abs(facing.relativeTo(tile.x, tile.y) - r) == 0){ //idx = 0
-                add(0);
+                addX(0);
                 xs[0] = x;
                 ys[0] = 0;
                 ids[0] = item;
             }else{ //idx = mid
-                add(mid);
+                addX(mid);
                 xs[mid] = x;
                 ys[mid] = 0.5f;
                 ids[mid] = item;
@@ -126,6 +126,35 @@ public class EIConveyorBlock extends ArmoredConveyor {
                     }
                 }
             }else super.setProp(content, value);
+        }
+
+        public void addX(int o){
+            if(len >= capacityX) return;
+            len++;
+        }
+
+        public void removeX(int o){
+            if(len >= capacityX) return;
+            len--;
+        }
+
+        @Override
+        public int removeStack(Item item, int amount){
+            noSleep();
+            int removed = 0;
+
+            for(int j = 0; j < amount; j++){
+                for(int i = 0; i < len; i++){
+                    if(ids[i] == item){
+                        removeX(i);
+                        removed ++;
+                        break;
+                    }
+                }
+            }
+
+            items.remove(item, removed);
+            return removed;
         }
     }
 }

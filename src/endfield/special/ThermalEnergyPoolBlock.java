@@ -3,7 +3,6 @@ package endfield.special;
 import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import arc.math.geom.Point2;
 import arc.math.geom.Vec2;
 import mindustry.gen.Building;
 import mindustry.type.Item;

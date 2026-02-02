@@ -16,19 +16,19 @@ public class ThermalEnergyPoolBlock extends ConsumeGenerator {
         public boolean acceptItem(Building source, Item item) {
             Building b1 = null, b2 = null;
             switch (rotation) {
-                case 0 -> {
+                case 2 -> {
                     b1 = world.tile((int) x / 8 + 2 , (int) y / 8).build;
                     b2 = world.tile((int) x / 8 + 2 , (int) y / 8 + 1).build;
                 }
-                case 1 -> {
+                case 3 -> {
                     b1 = world.tile((int) x / 8 , (int) y / 8 + 2).build;
                     b2 = world.tile((int) x / 8 + 1 , (int) y / 8 + 2).build;
                 }
-                case 2 -> {
+                case 0 -> {
                     b1 = world.tile((int) x / 8 - 1 , (int) y / 8).build;
                     b2 = world.tile((int) x / 8 - 1 , (int) y / 8 + 1).build;
                 }
-                case 3 -> {
+                case 1 -> {
                     b1 = world.tile((int) x / 8 , (int) y / 8 - 1).build;
                     b2 = world.tile((int) x / 8 + 1 , (int) y / 8 - 1).build;
                 }

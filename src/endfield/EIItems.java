@@ -33,7 +33,8 @@ public class EIItems {
     /* 工业产物(武陵) */
     //TODO 武陵的内容我想等武陵更完再更
 
-    // ,Xirang, XirangEquipmentPart, low_capacityWulingBattery //息壤 息壤装备原件 低容武陵电池
+    // ,Xirang, XirangEquipmentPart, low_capacityWulingBattery
+    //息壤 息壤装备原件 低容武陵电池
     ;
 
     public static void load() {
@@ -69,34 +70,34 @@ public class EIItems {
         }};
 
         denseCrystalline = new Item("dense-crystalline", Color.valueOf("CF9B66"));
-        highCrystalFiber = new Item("high-crystal-fiber", Color.valueOf("ffffff"));
-        steelBlock = new Item("steel-block", Color.valueOf("ffffff"));
+        highCrystalFiber = new Item("high-crystal-fiber", Color.valueOf("D4C9D7"));
+        steelBlock = new Item("steel-block", Color.valueOf("4DC4D1"));
 
-        carbonPowder = new Item("carbon-powder", Color.valueOf("ffffff")) {{
+        carbonPowder = new Item("carbon-powder", Color.valueOf("3D3D3D")) {{
             flammability = 0.65f;
         }};
-        sourceOrePowder = new Item("source-ore-powder", Color.valueOf("ffffff"));
-        crystalShellPowder = new Item("crystal-shell-powder", Color.valueOf("ffffff"));
-        amethystPowder = new Item("amethyst-powder", Color.valueOf("ffffff"));
-        blueIronPowder = new Item("blue-iron-powder", Color.valueOf("ffffff"));
-        sandLeafPowder = new Item("sand-leaf-powder", Color.valueOf("ffffff"));
-        ketonicShrubPowder = new Item("ketone-shrub-powder", Color.valueOf("ffffff"));
+        sourceOrePowder = new Item("source-ore-powder", Color.valueOf("BF9038"));
+        crystalShellPowder = new Item("crystal-shell-powder", Color.valueOf("C1441C"));
+        amethystPowder = new Item("amethyst-powder", Color.valueOf("63548A"));
+        blueIronPowder = new Item("blue-iron-powder", Color.valueOf("4B7293"));
+        sandLeafPowder = new Item("sand-leaf-powder", Color.valueOf("C08C00"));
+        ketonicShrubPowder = new Item("ketone-shrub-powder", Color.valueOf("C7BF47"));
 
-        denseCarbonPowder = new Item("dense-carbon-powder", Color.valueOf("ffffff"));
-        denseOriginiumPowder = new Item("dense-originium-powder", Color.valueOf("ffffff"));
-        denseCrystalPowder = new Item("dense-crystal-powder", Color.valueOf("ffffff"));
-        highCrystalPowder = new Item("high-crystal-powder", Color.valueOf("ffffff"));
-        denseBlueIronPowder = new Item("dense-blue-iron-powder", Color.valueOf("ffffff"));
+        denseCarbonPowder = new Item("dense-carbon-powder", Color.valueOf("5F5F5F"));
+        denseOriginiumPowder = new Item("dense-originium-powder", Color.valueOf("C99413"));
+        denseCrystalPowder = new Item("dense-crystal-powder", Color.valueOf("D9995A"));
+        highCrystalPowder = new Item("high-crystal-powder", Color.valueOf("CCCBE0"));
+        denseBlueIronPowder = new Item("dense-blue-iron-powder", Color.valueOf("4485DE"));
 
-        purpleCrystalBottle = new Item("purple-crystal-bottle", Color.valueOf("ffffff"));
-        blueIronBottle = new Item("blue-iron-bottle", Color.valueOf("ffffff"));
-        highCrystalBottle = new Item("high-crystal-bottle", Color.valueOf("ffffff"));
-        steelBottle = new Item("steel-bottle", Color.valueOf("ffffff"));
+        purpleCrystalBottle = new Item("purple-crystal-bottle", Color.valueOf("5C5599"));
+        blueIronBottle = new Item("blue-iron-bottle", Color.valueOf("21577C"));
+        highCrystalBottle = new Item("high-crystal-bottle", Color.valueOf("A3A0CC"));
+        steelBottle = new Item("steel-bottle", Color.valueOf("517499"));
 
-        amethystComponent = new Item("amethyst-component", Color.valueOf("ffffff"));
-        ironComponent = new Item("iron-component", Color.valueOf("ffffff"));
-        highCrystalComponent = new Item("high-crystal-component", Color.valueOf("ffffff"));
-        steelComponent = new Item("steel-component", Color.valueOf("ffffff"));
+        amethystComponent = new Item("amethyst-component", Color.valueOf("996CBF"));
+        ironComponent = new Item("iron-component", Color.valueOf("3060D5"));
+        highCrystalComponent = new Item("high-crystal-component", Color.valueOf("BFC9CD"));
+        steelComponent = new Item("steel-component", Color.valueOf("23305C"));
 
         amethystEquipmentPart = new Item("amethyst-equipment-part", Color.valueOf("ffffff"));
         blueIronEquipmentPart = new Item("blue-iron-equipment-part", Color.valueOf("ffffff"));
@@ -108,7 +109,7 @@ public class EIItems {
 
 
         /*
-        Xirang = new Item("Xirang", Color.valueOf("ffffff"));
+        Xirang = new Item("Xirang", Color.valueOf("46655A"));
         XirangEquipmentPart = new Item("Xirang-equipment-part", Color.valueOf("ffffff"));
 
         low_capacityWulingBattery = new Item("low-capacity-wuling-battery", Color.valueOf("ffffff"));

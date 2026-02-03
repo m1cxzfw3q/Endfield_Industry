@@ -17,7 +17,6 @@ public class EIConsumeItemEfficiency extends ConsumeItemEfficiency {
             itemMultipliers.put((Item)obj[i], (float)obj[i+2]);
         }
         filter = item -> itemMultipliers.containsKey(item);
-        booster = true;
     }
 
     @Override

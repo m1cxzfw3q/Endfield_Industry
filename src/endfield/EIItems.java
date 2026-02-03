@@ -103,16 +103,16 @@ public class EIItems {
         blueIronEquipmentPart = new Item("blue-iron-equipment-part", Color.valueOf("ffffff"));
         highCrystalEquipmentPart = new Item("high-crystal-equipment-part", Color.valueOf("ffffff"));
 
-        low_capacityValleyBattery = new Item("low-capacity-valley-battery", Color.valueOf("ffffff"));
-        medium_capacityValleyBattery = new Item("medium-capacity-valley-battery", Color.valueOf("ffffff"));
-        high_capacityValleyBattery = new Item("high-capacity-valley-battery", Color.valueOf("ffffff"));
+        low_capacityValleyBattery = new Item("low-capacity-valley-battery", Color.valueOf("6CC316"));
+        medium_capacityValleyBattery = new Item("medium-capacity-valley-battery", Color.valueOf("2759BB"));
+        high_capacityValleyBattery = new Item("high-capacity-valley-battery", Color.valueOf("7D36A3"));
 
 
         /*
         Xirang = new Item("Xirang", Color.valueOf("46655A"));
         XirangEquipmentPart = new Item("Xirang-equipment-part", Color.valueOf("ffffff"));
 
-        low_capacityWulingBattery = new Item("low-capacity-wuling-battery", Color.valueOf("ffffff"));
+        low_capacityWulingBattery = new Item("low-capacity-wuling-battery", Color.valueOf("2D9353"));
          */
     }
 }

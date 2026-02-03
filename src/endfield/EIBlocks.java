@@ -15,6 +15,9 @@ import mindustry.world.meta.Stat;
 
 public class EIBlocks {//武陵的内容我想等武陵更完再更
     public static Block
+
+    /* 地形 */
+    sourceOrePoint, amethystOrePoint, vivianitePoint,
     /* 基础(没管道) */
     protocolCore, //协议核心
     subCore, //次级核心

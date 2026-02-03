@@ -13,18 +13,17 @@ import arc.struct.EnumSet;
 import arc.struct.IntSeq;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
-import arc.util.Nullable;
-import arc.util.Strings;
-import arc.util.Structs;
-import arc.util.Tmp;
+import arc.util.*;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.core.Renderer;
+import mindustry.entities.units.BuildPlan;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.input.Placement;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.ui.Bar;
@@ -39,8 +38,7 @@ import mindustry.world.meta.BlockStatus;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.world.modules.PowerModule;
 
-import static mindustry.Vars.tilesize;
-import static mindustry.Vars.world;
+import static mindustry.Vars.*;
 
 public class ProtocolCoreBlock extends CoreBlock {
     public boolean isSub = false;
@@ -137,6 +135,11 @@ public class ProtocolCoreBlock extends CoreBlock {
                 () -> Pal.powerBar,
                 () -> entity.power.status
         ));
+    }
+
+    @Override
+    public void changePlacementPath(Seq<Point2> points, int rotation){
+        Placement.calculateNodes(points, this, rotation, (point, other) -> overlaps(world.tile(point.x, point.y), world.tile(other.x, other.y)));
     }
 
     protected static boolean overlaps(float srcx, float srcy, Tile other, Block otherBlock, float range){
@@ -236,8 +239,113 @@ public class ProtocolCoreBlock extends CoreBlock {
         });
     }
 
+    protected static BuildPlan otherReq;
+
+    @Override
+    public void drawPlanConfigTop(BuildPlan plan, Eachable<BuildPlan> list){
+        if(plan.config instanceof Point2[] ps){
+            setupColor(1f);
+            for(Point2 point : ps){
+                int px = plan.x + point.x, py = plan.y + point.y;
+                otherReq = null;
+                list.each(other -> {
+                    if(other.block != null
+                            && (px >= other.x - ((other.block.size-1)/2) && py >= other.y - ((other.block.size-1)/2) && px <= other.x + other.block.size/2 && py <= other.y + other.block.size/2)
+                            && other != plan && other.block.hasPower){
+                        otherReq = other;
+                    }
+                });
+
+                if(otherReq == null || otherReq.block == null) continue;
+
+                drawLaser(plan.drawx(), plan.drawy(), otherReq.drawx(), otherReq.drawy(), size, otherReq.block.size);
+            }
+            Draw.color();
+        }
+    }
+
+    @Override
+    public boolean canPlaceOn(Tile tile, Team team, int rotation) {
+        return true;
+    }
+
+    @Override
+    public boolean canReplace(Block other) {
+        return true;
+    }
+
+    protected int returnInt = -1;
+
+    protected void getPotentialLinks(Tile tile, Team team, Cons<Building> others){
+        if(!autolink) return;
+
+        Boolf<Building> valid = other -> other != null && other.tile != tile && other.block.connectedPower && other.power != null &&
+                (other.block.outputsPower || other.block.consumesPower || other.block instanceof PowerNode) &&
+                overlaps(tile.x * tilesize + offset, tile.y * tilesize + offset, other.tile, laserRange * tilesize) && other.team == team &&
+                !graphs.contains(other.power.graph) &&
+                !PowerNode.insulated(tile, other.tile) &&
+                !(other instanceof PowerNode.PowerNodeBuild obuild && obuild.power.links.size >= ((PowerNode)obuild.block).maxNodes) &&
+                !Structs.contains(Edges.getEdges(size), p -> { //do not link to adjacent buildings
+                    var t = world.tile(tile.x + p.x, tile.y + p.y);
+                    return t != null && t.build == other;
+                });
+
+        tempBuilds.clear();
+        graphs.clear();
+
+        //add conducting graphs to prevent double link
+        for(var p : Edges.getEdges(size)){
+            Tile other = tile.nearby(p);
+            if(other != null && other.team() == team && other.build != null && other.build.power != null){
+                graphs.add(other.build.power.graph);
+            }
+        }
+
+        if(tile.build != null && tile.build.power != null){
+            graphs.add(tile.build.power.graph);
+        }
+
+        var worldRange = laserRange * tilesize;
+        var tree = team.data().buildingTree;
+        if(tree != null){
+            tree.intersect(tile.worldx() - worldRange, tile.worldy() - worldRange, worldRange * 2, worldRange * 2, build -> {
+                if(valid.get(build) && !tempBuilds.contains(build)){
+                    tempBuilds.add(build);
+                }
+            });
+        }
+
+        tempBuilds.sort((a, b) -> {
+            int type = -Boolean.compare(a.block instanceof PowerNode, b.block instanceof PowerNode);
+            if(type != 0) return type;
+            return Float.compare(a.dst2(tile), b.dst2(tile));
+        });
+
+        returnInt = 0;
+
+        tempBuilds.each(valid, t -> {
+            if(returnInt ++ < maxNodes){
+                graphs.add(t.power.graph);
+                others.get(t);
+            }
+        });
+    }
+
     public class ProtocolCoreBuild extends CoreBuild {
         public float generateTime;
+
+        @Override
+        public void placed(){
+            if(net.client() || power.links.size > 0) return;
+
+            getPotentialLinks(tile, team, other -> {
+                if(!power.links.contains(other.pos())){
+                    configureAny(other.pos());
+                }
+            });
+
+            super.placed();
+        }
 
         @Override
         public float getPowerProduction(){
@@ -300,6 +408,26 @@ public class ProtocolCoreBlock extends CoreBlock {
             }
 
             Draw.reset();
+        }
+
+        @Override
+        public void updateTile() {
+            super.updateTile();
+            //感谢MinRi2大佬的讲解
+            //不过我还是喜欢堆史山（）
+            if (power != null && power.graph != null) {
+                if (power.graph.producers != null && !power.graph.producers.contains(this)) power.graph.producers.add(this);
+                if (power.graph.batteries != null && !power.graph.batteries.contains(this)) power.graph.batteries.add(this); //防止哪个版本给我判断成发电的
+            }
+        }
+
+        @Override
+        public Point2[] config(){
+            Point2[] out = new Point2[power.links.size];
+            for(int i = 0; i < out.length; i++){
+                out[i] = Point2.unpack(power.links.get(i)).sub(tile.x, tile.y);
+            }
+            return out;
         }
     }
 }

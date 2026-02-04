@@ -271,12 +271,12 @@ public class ProtocolCoreBlock extends CoreBlock {
 
     @Override
     public boolean canPlaceOn(Tile tile, Team team, int rotation) {
-        return true;
+        return isSub || !team.cores().contains(b -> b instanceof ProtocolCoreBuild);
     }
 
     @Override
     public boolean canReplace(Block other) {
-        return true;
+        return false;
     }
 
     protected int returnInt = -1;

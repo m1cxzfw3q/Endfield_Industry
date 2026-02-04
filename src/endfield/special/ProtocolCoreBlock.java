@@ -111,7 +111,7 @@ public class ProtocolCoreBlock extends CoreBlock {
     @Override
     public void init() {
         super.init();
-        if (!isSub) consumePowerBuffered(powerStorage);
+        consumePowerBuffered(!isSub ? powerStorage : 0);
     }
 
     @Override

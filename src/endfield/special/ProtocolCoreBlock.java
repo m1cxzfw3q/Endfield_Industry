@@ -289,11 +289,7 @@ public class ProtocolCoreBlock extends CoreBlock {
                 overlaps(tile.x * tilesize + offset, tile.y * tilesize + offset, other.tile, laserRange * tilesize) && other.team == team &&
                 !graphs.contains(other.power.graph) &&
                 !PowerNode.insulated(tile, other.tile) &&
-                !(other instanceof PowerNode.PowerNodeBuild obuild && obuild.power.links.size >= ((PowerNode)obuild.block).maxNodes) &&
-                !Structs.contains(Edges.getEdges(size), p -> { //do not link to adjacent buildings
-                    var t = world.tile(tile.x + p.x, tile.y + p.y);
-                    return t != null && t.build == other;
-                });
+                !(other instanceof PowerNode.PowerNodeBuild obuild && obuild.power.links.size >= ((PowerNode)obuild.block).maxNodes);
 
         tempBuilds.clear();
         graphs.clear();

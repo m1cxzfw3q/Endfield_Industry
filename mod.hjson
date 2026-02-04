@@ -1,5 +1,6 @@
 #the mod name as displayed in-game
 displayName: "Endfield Industry"
+subtitle: "-终末地工业"
 
 #the internal name of your mod
 name: "endfield-industry"

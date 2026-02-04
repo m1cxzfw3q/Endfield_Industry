@@ -18,7 +18,7 @@ public class ThermalEnergyPoolBlock extends ConsumeGenerator {
     }
 
     @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid) {
+    public void drawPlace(int x, int y, int rotation, boolean valid) {//写世处写的   能跑就行
         super.drawPlace(x, y, rotation, valid);
         TextureRegion tr = Core.atlas.find("industry-io");
         switch (rotation) {
@@ -41,29 +41,10 @@ public class ThermalEnergyPoolBlock extends ConsumeGenerator {
         }
     }
 
-    public class ThermalEnergyPoolBuild extends ConsumeGeneratorBuild {//写世处写的   能跑就行
+    public class ThermalEnergyPoolBuild extends ConsumeGeneratorBuild {
         @Override
         public boolean acceptItem(Building source, Item item) {
-            Building b1 = null, b2 = null;
-            switch (rotation) {
-                case 0 -> {
-                    b1 = world.tile((int) x / 8 - 1 , (int) y / 8).build;
-                    b2 = world.tile((int) x / 8 - 1 , (int) y / 8 + 1).build;
-                }
-                case 1 -> {
-                    b1 = world.tile((int) x / 8 , (int) y / 8 - 1).build;
-                    b2 = world.tile((int) x / 8 + 1 , (int) y / 8 - 1).build;
-                }
-                case 2 -> {
-                    b1 = world.tile((int) x / 8 + 2 , (int) y / 8).build;
-                    b2 = world.tile((int) x / 8 + 2 , (int) y / 8 + 1).build;
-                }
-                case 3 -> {
-                    b1 = world.tile((int) x / 8 , (int) y / 8 + 2).build;
-                    b2 = world.tile((int) x / 8 + 1 , (int) y / 8 + 2).build;
-                }
-            }
-            return super.acceptItem(source, item) && (b1 == source || b2 == source);
+            return super.acceptItem(source, item) && source.rotation == rotation;
         }
     }
 }

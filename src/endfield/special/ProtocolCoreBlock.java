@@ -33,9 +33,7 @@ import mindustry.world.Tile;
 import mindustry.world.blocks.power.PowerGraph;
 import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.blocks.storage.CoreBlock;
-import mindustry.world.meta.BlockFlag;
-import mindustry.world.meta.BlockStatus;
-import mindustry.world.meta.BuildVisibility;
+import mindustry.world.meta.*;
 import mindustry.world.modules.PowerModule;
 
 import static mindustry.Vars.*;
@@ -51,7 +49,6 @@ public class ProtocolCoreBlock extends CoreBlock {
     public int maxNodes = 1000;
     public boolean autolink = true, drawRange = false, sameBlockConnection = false;
 
-
     protected final static ObjectSet<PowerGraph> graphs = new ObjectSet<>();
 
     public ProtocolCoreBlock(String name) {
@@ -59,7 +56,6 @@ public class ProtocolCoreBlock extends CoreBlock {
         size = 9;
         itemCapacity = 8000;
         requirements(Category.effect, BuildVisibility.hidden, ItemStack.with());
-        outputsPower = true;
         consumesPower = true;
         hasPower = true;
         flags = EnumSet.of(BlockFlag.generator, BlockFlag.core, BlockFlag.battery);
@@ -115,26 +111,35 @@ public class ProtocolCoreBlock extends CoreBlock {
     @Override
     public void init() {
         super.init();
-        consumePowerBuffered(powerStorage);
+        if (!isSub) consumePowerBuffered(powerStorage);
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+
+        if (!isSub) stats.add(Stat.powerCapacity, powerStorage, StatUnit.none);
     }
 
     @Override
     public void setBars(){
         super.setBars();
 
-        addBar("power", (ProtocolCoreBuild entity) -> new Bar(() ->
-                Core.bundle.format("bar.poweroutput",
-                        Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)),
-                () -> Pal.powerBar,
-                () -> 1f
-        ));
-        addBar("powerstored", (ProtocolCoreBuild entity) -> new Bar(
-                () ->  Core.bundle.format("bar.powerstored",
-                        Strings.fixed(entity.power.status * powerStorage, 1),
-                        powerStorage),
-                () -> Pal.powerBar,
-                () -> entity.power.status
-        ));
+        if (!isSub) {
+            addBar("power", (ProtocolCoreBuild entity) -> new Bar(() ->
+                    Core.bundle.format("bar.poweroutput",
+                            Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)),
+                    () -> Pal.powerBar,
+                    () -> 1f
+            ));
+            addBar("powerstored", (ProtocolCoreBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.powerstored",
+                            Strings.fixed(entity.power.status * powerStorage, 1),
+                            powerStorage),
+                    () -> Pal.powerBar,
+                    () -> entity.power.status
+            ));
+        }
     }
 
     @Override
@@ -335,19 +340,6 @@ public class ProtocolCoreBlock extends CoreBlock {
         public float generateTime;
 
         @Override
-        public void placed(){
-            if(net.client() || power.links.size > 0) return;
-
-            getPotentialLinks(tile, team, other -> {
-                if(!power.links.contains(other.pos())){
-                    configureAny(other.pos());
-                }
-            });
-
-            super.placed();
-        }
-
-        @Override
         public float getPowerProduction(){
             return enabled ? powerProduction: 0f;
         }
@@ -417,7 +409,15 @@ public class ProtocolCoreBlock extends CoreBlock {
             //不过我还是喜欢堆史山（）
             if (power != null && power.graph != null) {
                 if (power.graph.producers != null && !power.graph.producers.contains(this)) power.graph.producers.add(this);
-                if (power.graph.batteries != null && !power.graph.batteries.contains(this)) power.graph.batteries.add(this); //防止哪个版本给我判断成发电的
+                if (power.graph.batteries != null && !power.graph.batteries.contains(this)) power.graph.batteries.add(this);
+            }
+
+            if(!net.client() || power.links.size <= 0) {
+                getPotentialLinks(tile, team, other -> {
+                    if (!power.links.contains(other.pos())) {
+                        configureAny(other.pos());
+                    }
+                });
             }
         }
 

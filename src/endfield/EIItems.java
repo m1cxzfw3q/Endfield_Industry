@@ -38,6 +38,7 @@ public class EIItems {
     ;
 
     public static void load() {
+        /* 四号谷地 */
         sourceOre = new Item("source-ore", Color.valueOf("D06C16")) {{
             hardness = 1;
         }};
@@ -99,18 +100,18 @@ public class EIItems {
         highCrystalComponent = new Item("high-crystal-component", Color.valueOf("BFC9CD"));
         steelComponent = new Item("steel-component", Color.valueOf("23305C"));
 
-        amethystEquipmentPart = new Item("amethyst-equipment-part", Color.valueOf("ffffff"));
-        blueIronEquipmentPart = new Item("blue-iron-equipment-part", Color.valueOf("ffffff"));
-        highCrystalEquipmentPart = new Item("high-crystal-equipment-part", Color.valueOf("ffffff"));
+        amethystEquipmentPart = new Item("amethyst-equipment-part", Color.valueOf("B6AAD3"));
+        blueIronEquipmentPart = new Item("blue-iron-equipment-part", Color.valueOf("6C8EE6"));
+        highCrystalEquipmentPart = new Item("high-crystal-equipment-part", Color.valueOf("AABAD2"));
 
         low_capacityValleyBattery = new Item("low-capacity-valley-battery", Color.valueOf("6CC316"));
         medium_capacityValleyBattery = new Item("medium-capacity-valley-battery", Color.valueOf("2759BB"));
         high_capacityValleyBattery = new Item("high-capacity-valley-battery", Color.valueOf("7D36A3"));
 
-
+        /* 武陵 */
         /*
         Xirang = new Item("Xirang", Color.valueOf("46655A"));
-        XirangEquipmentPart = new Item("Xirang-equipment-part", Color.valueOf("ffffff"));
+        XirangEquipmentPart = new Item("Xirang-equipment-part", Color.valueOf("7B9426"));
 
         low_capacityWulingBattery = new Item("low-capacity-wuling-battery", Color.valueOf("2D9353"));
          */

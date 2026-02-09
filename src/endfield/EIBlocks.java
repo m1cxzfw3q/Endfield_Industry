@@ -15,15 +15,19 @@ import mindustry.world.meta.Stat;
 
 public class EIBlocks {//武陵的内容我想等武陵更完再更
     public static Block
-
     /* 地形 */
-    sourceOrePoint, amethystOrePoint, vivianitePoint,
-    /* 基础(没管道) */
+    sourceOreVein, amethystOreVein, vivianiteVein,
+    /* 基础 */
     protocolCore, //协议核心
     subCore, //次级核心
     conveyor, //传送带
+    //pipe, //管道
     /* 采集(四号谷地) */
+    portableOriginiumMiner, //便携式源石矿机
+    electricMiner, //电驱矿机
+    electricMinerType2, //二型电驱矿机
     /* 物流(四号谷地) */
+
     /* 仓储(四号谷地) */
     protocolStorageBox, //协议储存箱
     /* 生产(四号谷地) */
@@ -40,6 +44,9 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
         subCore = new ProtocolCoreBlock("sub-core") {{
             isSub = true;
         }};
+        conveyor = new EIConveyorBlock("conveyor");
+        //pipe = new EIConduitBlock("pipe");
+
         protocolStorageBox = new ProtocolStorageBoxBlock("protocol-storage-box");
 
         repeater = new PowerNode("repeater") {
@@ -73,8 +80,6 @@ public class EIBlocks {//武陵的内容我想等武陵更完再更
                 super.drawShadow(tile);
             }
         };
-
-        conveyor = new EIConveyorBlock("conveyor");
 
         thermalEnergyPool = new ThermalEnergyPoolBlock("thermal-energy-pool") {{
             size = 2;

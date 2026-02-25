@@ -20,7 +20,7 @@ public class ThermalEnergyPoolBlock extends ConsumeGenerator {
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {//写世处写的   能跑就行
         super.drawPlace(x, y, rotation, valid);
-        TextureRegion tr = Core.atlas.find("industry-io");
+        TextureRegion tr = Core.atlas.find("endfield-industry-item-io");
         switch (rotation) {
             case 0 -> {
                 Draw.rect(tr, new Vec2(x - 1 , y), rotation);

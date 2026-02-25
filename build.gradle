@@ -79,7 +79,6 @@ jar{
 
     from(projectDir){
         include "mod.hjson"
-        include "icon.png"
     }
 
     from("assets/"){
@@ -100,3 +99,4 @@ tasks.register('deploy', Jar){
         }
     }
 }
+

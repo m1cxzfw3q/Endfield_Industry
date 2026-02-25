@@ -75,27 +75,6 @@ public class AdaptiveMultiCrafter extends GenericCrafter {
         public @Nullable Recipe currentRecipe;
 
         @Override
-        public void dumpOutputs(){ //神经
-            boolean b = true;
-            while (b){
-                if (outputItems != null && timer(timerDump, dumpTime / timeScale)) {
-                    for (ItemStack output : outputItems) {
-                        dump(output.item);
-                    }
-                }
-
-                if (outputLiquids != null) {
-                    for (int i = 0; i < outputLiquids.length; i++) {
-                        int dir = liquidOutputDirections.length > i ? liquidOutputDirections[i] : -1;
-
-                        dumpLiquid(outputLiquids[i].liquid, 2f, dir);
-                    }
-                }
-                b = false;
-            }
-        }
-
-        @Override
         public void updateTile() {
             for (Recipe recipe : recipes) {
                 if (items.has(recipe.inputItems) &&liquids.get(recipe.inputLiquid.liquid) >= 1) currentRecipe = recipe;
